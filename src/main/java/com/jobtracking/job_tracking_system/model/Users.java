@@ -18,7 +18,7 @@ import java.time.OffsetDateTime;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId", columnDefinition = "BIGSERIAL")
+    @Column(name = "userid", columnDefinition = "BIGSERIAL")
     private Long userId;
 
     @Column(name = "username", nullable = false, length = 50)
@@ -30,10 +30,10 @@ public class Users {
     @Column(name = "password", nullable = false, length = 256)
     private String password;
 
-    @Column(name = "firstName", length = 50)
+    @Column(name = "firstname", length = 50)
     private String firstName;
 
-    @Column(name = "lastName", length = 50)
+    @Column(name = "lastname", length = 50)
     private String lastName;
     
     @Column(name = "role", nullable = false, length = 20)
@@ -42,10 +42,10 @@ public class Users {
     @Column(name = "status", nullable = false, length = 20)
     private String status = "ACTIVE";
 
-    @Column(name = "createDate", nullable = false)
+    @Column(name = "createdate", nullable = false)
     private OffsetDateTime createDate;
 
-    @Column(name = "updateDate", nullable = false)
+    @Column(name = "updatedate", nullable = false)
     private OffsetDateTime updateDate;
 
     @PrePersist
