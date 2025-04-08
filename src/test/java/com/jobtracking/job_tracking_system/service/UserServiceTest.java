@@ -12,10 +12,30 @@ public class UserServiceTest {
 
     @Test
     public void testUserRegister() {
-        Users user = new Users();
-        user.setUsername("testconnection");
-        user.setEmail("testconnection");
-        user.setPassword("testconnection");
+        // correct sample
+        String username = "testuser";
+        String email = "test@email.ca";
+        String password = "Test123!";
+        String confirmPassword = "Test123!";
+        String firstName = "Test";
+
+        Long result = 
+
+        // incorrect username
+        username = "te";
+
+        // incorrect email
+        email = "testemail.ca";
+
+        // incorrect password
+        password = "test123";
+
+        // incorrect confirm password
+        confirmPassword = "Test123";
+
+        // incorrect first name
+        firstName = "@Test";
+
         //long result = userService.userRegister();
         //Assert.isTrue(result == 1L, "User registration failed");
     }
