@@ -13,7 +13,7 @@ public interface UserService {
      * @param user
      * @return user
      */
-    Long userRegister(Users user);
+    Long userRegister(String username, String email, String password, String confirmPassword, String firstName, String lastName);
 
    
     // Optional<Users> getUserById(Long id);
