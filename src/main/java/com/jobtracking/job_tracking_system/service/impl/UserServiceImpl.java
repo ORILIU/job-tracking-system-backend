@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         //     return -1L;
         // }
 
-        String passwordRegex = "\"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[^A-Za-z0-9]).{6,30}$\"";
+        String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{6,30}$";
         Matcher passwordMatcher = Pattern.compile(passwordRegex).matcher(password);
         if (!passwordMatcher.find()) {
             return -1L;
@@ -62,18 +62,21 @@ public class UserServiceImpl implements UserService {
         } else if (userRepository.existsByEmail(email)) {
             return -1L;
         }
-
-        firstName = firstName == "" ? null : firstName;
-        lastName = lastName == "" ? null : lastName;
-
-        String nameRegex = "^[A-Za-z]$";
-        Matcher nameMatcher = Pattern.compile(nameRegex).matcher(firstName);
-        if (firstName != null && !nameMatcher.find()) {
-            return -1L;
+        
+        if (firstName != null && !firstName.isEmpty()) {
+            String nameRegex = "^[A-Za-z]+$";
+            Matcher nameMatcher = Pattern.compile(nameRegex).matcher(firstName);
+            if (!nameMatcher.find()) {
+                return -1L;
+            }
         }
-        nameMatcher = Pattern.compile(nameRegex).matcher(lastName);
-        if (lastName != null && !nameMatcher.find()) {
-            return -1L;
+
+        if (lastName != null && !lastName.isEmpty()) {
+            String nameRegex = "^[A-Za-z]+$";
+            Matcher nameMatcher = Pattern.compile(nameRegex).matcher(lastName);
+            if (!nameMatcher.find()) {
+                return -1L;
+            }
         }
 
         Users user = new Users();

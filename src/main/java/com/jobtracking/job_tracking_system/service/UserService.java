@@ -10,8 +10,8 @@ import com.jobtracking.job_tracking_system.model.Users;
 public interface UserService {
     /**
      * user register
-     * @param user
-     * @return user
+     * @param username, email, password, confirmPassword, firstName, lastName
+     * @return user id
      */
     Long userRegister(String username, String email, String password, String confirmPassword, String firstName, String lastName);
 
