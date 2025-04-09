@@ -2,7 +2,7 @@ package com.jobtracking.job_tracking_system.repository;
 
 import com.jobtracking.job_tracking_system.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
-// import java.util.Optional;
+import java.util.Optional;
 
 /**
  * base and custom operations for users table
@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<Users, Long> {
      * @param username
      * @return user or null if not found
      */
-    // Optional<User> findByUsername(String username);
+    Optional<Users> findByUsername(String username);
 
     /**
      * find user by email
@@ -27,12 +27,12 @@ public interface UserRepository extends JpaRepository<Users, Long> {
      * @param username
      * @return true if user exists, false otherwise
      */
-    // boolean existsByUsername(String username);
+    boolean existsByUsername(String username);
 
     /**
      * check if user with email exists
      * @param email
-     * @return true if user exists, false otherwise
+     * @return true if email exists, false otherwise
      */
-    // boolean existsByEmail(String email);
+    boolean existsByEmail(String email);
 } 

@@ -1,6 +1,7 @@
 package com.jobtracking.job_tracking_system.controller;
 
 import com.jobtracking.job_tracking_system.model.Users;
+import com.jobtracking.job_tracking_system.model.request.UserRegisterRequest;
 import com.jobtracking.job_tracking_system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +16,31 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity<Long> userRegister(@RequestBody Users user) {
+    @PostMapping("/register")
+    public Long userRegister(@RequestBody UserRegisterRequest request) {
         // if (userService.existsByUsername(user.getUsername())) {
         //     return ResponseEntity.badRequest().build();
         // }
         // if (userService.existsByEmail(user.getEmail())) {
         //     return ResponseEntity.badRequest().build();
         // }
-        return ResponseEntity.ok(userService.userRegister(user));
+        if (request == null) {
+            return -1L;
+        }
+        String username = request.getUsername();
+        String email = request.getEmail();
+        String password = request.getPassword();
+        String confirmPassword = request.getConfirmPassword();
+        String firstName = request.getFirstName();
+        String lastName = request.getLastName();
+
+        if (username == null || email == null || password == null || confirmPassword == null) {
+            return -1L;
+        }
+
+        // success userId, else -1L
+        long result = userService.userRegister(username, email, password, confirmPassword, firstName, lastName);
+        return result;
     }
 
     // @GetMapping("/{id}")
