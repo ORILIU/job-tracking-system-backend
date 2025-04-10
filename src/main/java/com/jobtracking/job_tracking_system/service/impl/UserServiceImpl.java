@@ -6,6 +6,7 @@ import com.jobtracking.job_tracking_system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -18,6 +19,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    /**
+     * salt for password encryption
+     */
+    private static final String SALT = "jobtrackingSALT";
 
     @Override
     public Long userRegister(String username, String email, String password, String confirmPassword, String firstName, String lastName) {
@@ -79,14 +85,18 @@ public class UserServiceImpl implements UserService {
             }
         }
 
+        // password encryption
+        String encryptedPassword = DigestUtils.md5DigestAsHex((password + SALT).getBytes());
+
+        // inserted data
         Users user = new Users();
         user.setUsername(username);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(encryptedPassword);
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        Users result = userRepository.save(user);
-        return result.getUserId();
+        Users saveResult = userRepository.save(user);
+        return saveResult.getUserId();
     }
 
     // @Override
